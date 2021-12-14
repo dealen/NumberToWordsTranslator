@@ -101,6 +101,25 @@ namespace NumbersToWordsService
         private string ConvertFractions(string input)
         {
             string result = string.Empty;
+            //if (!int.TryParse(input, out int fraction)) return string.Empty;
+
+            //if (fraction > 20 && int.TryParse(input[0].ToString(), out int tenths))
+            //{
+            //    if (!_tenths.TryGetValue(tenths, out string tenthsOutput)) return string.Empty;
+
+            //    result += $"{tenthsOutput}";
+            //    if (fraction % 10 != 0)
+            //        result += "-";
+            //}
+
+            //var valueForParse = fraction > 10 && fraction < 20 ? input.Substring(0, 2) : input.Substring(1, 1);
+            //if (!int.TryParse(valueForParse, out int fraction2)) return string.Empty;
+
+            //if (!_digits.TryGetValue(fraction2, out string output)) return string.Empty;
+
+            //if (fraction == 0)// || !_digits.TryGetValue(fraction, out output))
+            //    return string.Empty;
+
             if (!int.TryParse(input, out int fraction)) return string.Empty;
 
             if (fraction > 20 && int.TryParse(input[0].ToString(), out int tenths))
@@ -110,23 +129,27 @@ namespace NumbersToWordsService
                 result += $"{tenthsOutput}";
                 if (fraction % 10 != 0)
                     result += "-";
+                string output = string.Empty; ;
+                if (!int.TryParse(input[1].ToString(), out fraction)) return string.Empty;
+                if (fraction != 0)
+                    if (!_digits.TryGetValue(fraction, out output)) return string.Empty;
+                if (fraction == 1)
+                    result += $"{output} cent";
+                else if (fraction == 0)
+                    result += $" cents";
+                else
+                    result += $"{output} cents";
             }
-
-            var valueForParse = fraction > 10 && fraction < 20 ? input.Substring(0, 2) : input.Substring(1, 1);
-            if (!int.TryParse(valueForParse, out int fraction2)) return string.Empty;
-
-            if (!_digits.TryGetValue(fraction2, out string output))
-            {
-                if (fraction == 0 || !_digits.TryGetValue(fraction, out output))
-                    return string.Empty;
-            }
-
-            if (fraction == 1)
-                result += $"{output} cent";
-            else if (fraction == 0)
-                result += $" cents";
             else
-                result += $"{output} cents";
+            {
+                if (!_digits.TryGetValue(fraction, out string output)) return string.Empty;
+                if (fraction == 1)
+                    result += $"{output} cent";
+                else if (fraction == 0)
+                    result += $" cents";
+                else
+                    result += $"{output} cents";
+            }
 
             return result;
         }
@@ -190,26 +213,9 @@ namespace NumbersToWordsService
             if (!int.TryParse(input, out int value)) return string.Empty;
 
             GetHundreds(ref result, input, ref value);
-
-            //if (!int.TryParse(input.Substring(1, 2), out value)) return string.Empty;
-
             GetTenths(ref result, input, ref value);
-
-            //var valueForParse = value > 10 && value < 20
-            //    ? input.Substring(1, 2)
-            //    : result.Contains("-") ? input.Substring(2, 1) : input.Substring(1, 1);
-
-            //if (valueForParse.Equals("0") && input.Length == 3 && !input[2].Equals("0"))
-            //    valueForParse = input[2].ToString();
-
-            //if (!int.TryParse(valueForParse, out value)) return string.Empty;
-
-            //if (!_digits.TryGetValue(value, out string output)) return string.Empty;
-
-            //result += $"{output} thousand ";
-
             GetDigits(ref result, input, ref value);
-            
+
             result += $" thousand ";
 
             return result;
@@ -221,23 +227,8 @@ namespace NumbersToWordsService
             if (!int.TryParse(input, out int value)) return string.Empty;
 
             GetHundreds(ref result, input, ref value);
-
-            //if (!int.TryParse(input.Substring(1, 2), out value)) return string.Empty;
-                        
             GetTenths(ref result, input, ref value);
-
-            //var valueForParse = value > 10 && value < 20
-            //    ? input.Substring(1, 2)
-            //    : result.Contains("-") ? input.Substring(2, 1) : input.Substring(1, 1);
-
             GetDigits(ref result, input, ref value);
-
-            //if (valueForParse.Equals("0") && input.Length == 3 && !input[2].Equals("0"))
-            //    valueForParse = input[2].ToString();
-
-            //if (!int.TryParse(valueForParse, out value)) return string.Empty;
-
-            //if (!_digits.TryGetValue(value, out string output)) return string.Empty;
 
             result += $" million ";
 

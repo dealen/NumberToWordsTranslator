@@ -28,7 +28,8 @@ namespace NumbersToWordsTranslator
             get => _numberToConvert;
             set
             {
-                _numberToConvert = value;
+                if (double.TryParse(value, out double result) || value[value.Length-1].Equals(','))
+                    _numberToConvert = value;
                 OnPropertyChanged();
             }
         }
