@@ -26,6 +26,7 @@ namespace NumbersToWordsTests
             var result8 = Service.Convert("2,09");
             var result9 = Service.Convert("02,09");
             var result10 = Service.Convert("01,01");
+            var result11 = Service.Convert("21,20");
 
             result1.Should().Be("zero dollars");
             result2.Should().Be("one dollar and thirty-four cents");
@@ -37,6 +38,7 @@ namespace NumbersToWordsTests
             result8.Should().Be("two dollars and nine cents");
             result9.Should().Be("two dollars and nine cents");
             result10.Should().Be("one dollar and one cent");
+            result11.Should().Be("twenty-one dollars and twenty cents");
         }
     }
 }

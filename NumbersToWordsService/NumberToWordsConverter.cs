@@ -101,28 +101,10 @@ namespace NumbersToWordsService
         private string ConvertFractions(string input)
         {
             string result = string.Empty;
-            //if (!int.TryParse(input, out int fraction)) return string.Empty;
-
-            //if (fraction > 20 && int.TryParse(input[0].ToString(), out int tenths))
-            //{
-            //    if (!_tenths.TryGetValue(tenths, out string tenthsOutput)) return string.Empty;
-
-            //    result += $"{tenthsOutput}";
-            //    if (fraction % 10 != 0)
-            //        result += "-";
-            //}
-
-            //var valueForParse = fraction > 10 && fraction < 20 ? input.Substring(0, 2) : input.Substring(1, 1);
-            //if (!int.TryParse(valueForParse, out int fraction2)) return string.Empty;
-
-            //if (!_digits.TryGetValue(fraction2, out string output)) return string.Empty;
-
-            //if (fraction == 0)// || !_digits.TryGetValue(fraction, out output))
-            //    return string.Empty;
 
             if (!int.TryParse(input, out int fraction)) return string.Empty;
 
-            if (fraction > 20 && int.TryParse(input[0].ToString(), out int tenths))
+            if (fraction >= 20 && int.TryParse(input[0].ToString(), out int tenths))
             {
                 if (!_tenths.TryGetValue(tenths, out string tenthsOutput)) return string.Empty;
 

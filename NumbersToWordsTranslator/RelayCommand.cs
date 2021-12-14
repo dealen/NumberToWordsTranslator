@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 namespace NumbersToWordsTranslator
 {
+    /// <typeparam name="T"></typeparam>
     public class RelayCommand<T> : ICommand
     {
         #region Fields
