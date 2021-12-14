@@ -150,7 +150,7 @@ namespace NumbersToWordsService
             if (!int.TryParse(input.Substring(1, 2), out int tenthsValue)) return;
             var valueForParse = value > 10 && value < 20 ?
                 input.Substring(1, 2) : input.Substring(1, 1);
-            if (tenthsValue > 20 && int.TryParse(valueForParse, out int tenths))
+            if (tenthsValue >= 20 && int.TryParse(valueForParse, out int tenths))
             {
                 if (!_tenths.TryGetValue(tenths, out string tenthsOutput)) return;
 
@@ -165,7 +165,7 @@ namespace NumbersToWordsService
         {
             if (!int.TryParse(input.Substring(1, 2), out int digitResult)) return;
 
-            var valueForParse = digitResult > 10 && digitResult < 20 ? input.Substring(1, 2) : input.Substring(2, 1);
+            var valueForParse = digitResult >= 10 && digitResult < 20 ? input.Substring(1, 2) : input.Substring(2, 1);
             if (!int.TryParse(valueForParse, out value)) return;
 
             if (value == 0)
